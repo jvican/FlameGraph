@@ -368,6 +368,14 @@ sub color {
 	}
 
 	# multi palettes
+	if (defined $type and $type eq "scala-compilation") {
+		if ($name =~ m:_\[i\]$:) {	# macro
+			return $type = "rgb(0,199,169)";
+		} else {			# normal scala code
+			$type = "green";
+		}
+		# fall-through to color palettes
+	}
 	if (defined $type and $type eq "java") {
 		# Handle both annotations (_[j], _[i], ...; which are
 		# accurate), as well as input that lacks any annotations, as

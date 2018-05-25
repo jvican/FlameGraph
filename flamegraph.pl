@@ -219,7 +219,7 @@ if ($notestext =~ /[<>]/) {
 # - yellow gradient: default (hot, java, js, perl)
 # - blue gradient: mem, chain
 # - gray gradient: io, wakeup, flat colors (red, green, blue, ...)
-if ($colors eq "mem" or $colors eq "chain") {
+if ($colors eq "mem" or $colors eq "chain" or $colors eq "scala-compilation") {
 	$bgcolor1 = "#eeeeee"; $bgcolor2 = "#e0e0ff";
 }
 if ($colors =~ /^(io|wakeup|red|green|blue|aqua|yellow|purple|orange)$/) {
@@ -371,6 +371,8 @@ sub color {
 	if (defined $type and $type eq "scala-compilation") {
 		if ($name =~ m:_\[i\]$:) {	# macro
 			return $type = "rgb(0,199,169)";
+		} elsif ($name =~ m:_\[j\]$:) {	# macro failure
+			$type = "red";
 		} else {			# normal scala code
 			$type = "green";
 		}
